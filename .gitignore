@@ -1,6 +1,10 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+node_modules
+bower_components
+.idea
+.tmp
 
 # Folder config file
 Desktop.ini
