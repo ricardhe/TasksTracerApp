@@ -8,8 +8,9 @@
  *
  * Main module of the application.
  */
-angular
-  .module('taskTrackerApp', [
+
+'use strict';
+var app = angular.module('taskTrackerApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -17,6 +18,7 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
+  .value('apiUrl', "http://localhost:63023/")
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
