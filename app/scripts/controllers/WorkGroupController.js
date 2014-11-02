@@ -2,16 +2,14 @@
  * Created by PAULA on 19/09/2014.
  */
 
-
 //angular.module('taskTrackerApp',[])
-app.controller('WorkGroupCtrl', ['$scope','workgroupManager','Workgroup', function($scope,workgroupManager,Workgroup) {
+app.controller('WorkGroupCtrl', ['$scope','workgroupManager','WorkgroupFactory', function($scope,workgroupManager,WorkgroupFactory) {
 
     var self = this;
     self.status={message:"",state:null};
     self.workgroups = {};
 
-    self.ItemSelected = new Workgroup();
-
+    self.ItemSelected = WorkgroupFactory.create();
 
     this.setMessage = function(message,state)
     {
@@ -37,7 +35,7 @@ app.controller('WorkGroupCtrl', ['$scope','workgroupManager','Workgroup', functi
                                                function(item) {
                                                    workgroupManager.setItem(item);
                                                    self.setMessage("workgroup updated satisfactory",1);
-                                                   self.ItemSelected = new Workgroup();
+                                                   self.ItemSelected = WorkgroupFactory.create();
                                                }
                                                ,
                                                function(errorMessage) {
@@ -51,7 +49,7 @@ app.controller('WorkGroupCtrl', ['$scope','workgroupManager','Workgroup', functi
                                                 function(newITem) {
                                                     self.workgroups.push(newITem);
                                                     workgroupManager.setItem(newITem);
-                                                    self.ItemSelected = new Workgroup();
+                                                    self.ItemSelected = WorkgroupFactory.create();
                                                     self.setMessage("workgroup inserted satisfactory",1);
                                                 }
                                                 ,
@@ -88,7 +86,6 @@ app.controller('WorkGroupCtrl', ['$scope','workgroupManager','Workgroup', functi
     {
        self.ItemSelected=newSelectedItem;
     }
-
 
     this.isInvalid = function(field){
         return $scope.frmWrkgrp[field].$invalid && $scope.frmWrkgrp[field].$dirty;

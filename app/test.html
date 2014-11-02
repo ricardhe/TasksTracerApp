@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<div ng-controller="WorkGroupCtrl as wk" ng-init="wk.LoadController()">
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>id</td>
+            <td>Name</td>
+            <td> Alias</td>
+            <td>Description</td>
+            <td>UrlIdentifier</td>
+            <td>Email Group</td>
+            <td>CreateDate</td>
+            <td>Active</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="wrkgrp in wk.workgroups">
+            <td><button ng-click="wk.selectItem(wrkgrp)">Sel</button></td>
+            <td><button ng-click="wk.deleteWorkGroup(wrkgrp)">Del</button></td>
+            <td>{{wrkgrp.idWorkGroup}}</td>
+            <td>{{wrkgrp.Name}}</td>
+            <td>{{wrkgrp.Alias}} </td>
+            <td>{{wrkgrp.Description}}</td>
+            <td>{{wrkgrp.URLIdentifier}}</td>
+            <td>{{wrkgrp.EmailGroup}}</td>
+            <td>{{wrkgrp.CreateDate | date:'dd/MM/yyyy'}}</td>
+            <td>{{wrkgrp.Active}} </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <span style="color:#ff1e1c"   ng-show="!wk.status.state && wk.status.message!=''">{{wk.status.message}}</span>
+    <span style="color:green"     ng-show="wk.status.state && wk.status.message!=''">{{wk.status.message}}</span>
+
+
+    <form name="frmWrkgrp" ng-submit="wk.SaveWorkGroup()">
+
+        <input type="hidden" name="idWorkGroup"    ng-model="wk.ItemSelected.idWorkGroup" />
+        <input type="text" name="name" ng-model="wk.ItemSelected.Name"  required ng-maxlength="50" placeholder="Name"/>
+        <input type="text" name="Alias"    ng-model="wk.ItemSelected.Alias"           required ng-maxlength="20"  placeholder="Alias"/>
+        <input type="text" name="Description"    ng-model="wk.ItemSelected.Description"     required ng-maxlength="500"  placeholder="Description"/>
+        <input type="email" name="email"   ng-model="wk.ItemSelected.EmailGroup"      required ng-maxlength="30" placeholder="Email Group"/>
+
+        <button type="submit">Save</button>
+        <button type="button" ng-click="wk.ItemSelected={}">New</button>
+
+    </form>
+
+
+    <table class="table table-hover" ng-show="wk.ItemSelected.RelatedUsers.length > 0">
+        <thead>
+        <tr>
+            <td>idUser</td><td>Name</td><td>Surnames</td><td>Alias</td><td>Email</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  ng-repeat="us in wk.ItemSelected.RelatedUsers">
+            <td>{{us.idUser}}</td><td>{{us.Name}}</td><td>{{us.Surnames}}</td><td>{{us.Alias}}</td><td>{{us.Email}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+</body>
+</html>

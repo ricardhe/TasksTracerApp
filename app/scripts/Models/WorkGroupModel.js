@@ -2,25 +2,43 @@
  * Created by PAULA on 25/09/2014.
  */
 
-app.factory('Workgroup', ['$http','$q','workgroupSrv','apiUrl', function($http,$q,workgroupSrv,apiUrl) {
+app.factory('Workgroup', ['$http','$q','workgroupSrv','UserFactory', function($http,$q,workgroupSrv,UserFactory) {
 
     function Workgroup(workgroupData) {
+
         if (workgroupData) {
             this.setData(workgroupData);
         }
+
         // Some other initializations related to workgroup
-    };
+    }
 
     Workgroup.prototype = {
 
+        RelatedUsers: {},
+
+        /* Depending Objects */
+        setUsers:function(items) {
+            var self = this;
+            self.RelatedUsers = [];
+            if (items) {
+                angular.forEach(items, function (itemData) {
+                    var item = UserFactory.create(itemData);
+                    self.RelatedUsers.push(item);
+                });
+            }
+
+        },
+
         setData: function(workgroupData) {
             angular.extend(this, workgroupData);
+            this.setUsers(workgroupData.Users);
         },
         delete: function() {
 
             var scope = this;
             var deferred = $q.defer();
-
+            //comentari
             workgroupSrv.DeleteWorkGroup(this.idWorkGroup).then(
                 function() {
                     deferred.resolve(scope);
@@ -57,26 +75,39 @@ app.factory('Workgroup', ['$http','$q','workgroupSrv','apiUrl', function($http,$
             var deferred = $q.defer();
 
             workgroupSrv.PostWorkGroup(this).then(
-              function(res) {
-                  scope.setData(res.data);
-                  deferred.resolve(scope);
-                  console.log("WorkGroup Inserted: " + res.data);
-              },
-              function(error) {
-                  deferred.reject(error.message);
-                  console.log(error.message);
-              }
+                function(res) {
+                    scope.setData(res.data);
+                    deferred.resolve(scope);
+                    console.log("WorkGroup Inserted: " + res.data);
+                },
+                function(error) {
+                    deferred.reject(error.message);
+                    console.log(error.message);
+                }
             );
             return  deferred.promise;
         }
+
     };
 
     return Workgroup;
+}]);
+
+app.factory('WorkgroupFactory', ['Workgroup', function(Workgroup) {
+
+    //return Workgroup;
+    // Public API (only for creating new instances)
+    return {
+        create: function(itemData)
+        {
+            return new Workgroup(itemData);
+        }
+    }
 
 }]);
 
 
-app.factory('workgroupManager', ['$http', '$q', 'Workgroup','workgroupSrv', function($http, $q, Workgroup,workgroupSrv) {
+app.factory('workgroupManager', ['$http', '$q', 'WorkgroupFactory','workgroupSrv', function($http, $q, WorkgroupFactory,workgroupSrv) {
 
     var workgroupManager = {
 
@@ -87,7 +118,7 @@ app.factory('workgroupManager', ['$http', '$q', 'Workgroup','workgroupSrv', func
                                                         if (instance) {
                                                             instance.setData(itemData);
                                                         } else {
-                                                            instance = new Workgroup(itemData);
+                                                            instance = WorkgroupFactory.create(itemData);
                                                             this._pool[id] = instance;
                                                         }
                                                         return instance;
@@ -99,10 +130,10 @@ app.factory('workgroupManager', ['$http', '$q', 'Workgroup','workgroupSrv', func
         },
 
         _load: function(id, deferred) {
-                                        var scope = this;
+                                        var self = this;
 
                                         workgroupSrv.GetWorkGroup(id).success(function(itemData) {
-                                                                                                    var item = scope._retrieveInstance(itemData.idWorkGroup, itemData);
+                                                                                                    var item = self._retrieveInstance(itemData.idWorkGroup, itemData);
                                                                                                     deferred.resolve(item);
                                                                                 }
                                                                              ).error( function() {
@@ -152,13 +183,13 @@ app.factory('workgroupManager', ['$http', '$q', 'Workgroup','workgroupSrv', func
         /* Use this function in order to get instances of all the Items */
         getAllWorkGroups: function() {
             var deferred = $q.defer();
-            var scope = this;
+            var self = this;
             workgroupSrv.GetWorkGroups().then(
                                                 function(itemArray){
 
                                                     var listItems = [];
                                                     angular.forEach(itemArray.data,function(itemData) {
-                                                        var item = scope._retrieveInstance(itemData.idWorkGroup, itemData);
+                                                        var item = self._retrieveInstance(itemData.idWorkGroup, itemData);
                                                         listItems.push(item);
                                                     });
 
@@ -177,4 +208,5 @@ app.factory('workgroupManager', ['$http', '$q', 'Workgroup','workgroupSrv', func
     return workgroupManager;
 
 }]);
+
 

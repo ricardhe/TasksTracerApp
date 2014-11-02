@@ -17,7 +17,7 @@ app.factory('workRsrc', ['$resource','apiUrl', function($resource,apiUrl) {
 app.service('workgroupSrv', ['$http','apiUrl', function($http,apiUrl) {
 
     //var workRsrc = new workRsrc();
-    var apiurl = apiUrl + "api/WorkGroup";
+    var apiurl = apiUrl + "api/WorkGroups";
 // GET api/WorkGroup
     this.GetWorkGroups = function() {
        return $http.get(apiurl);
