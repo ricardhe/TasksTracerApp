@@ -213,8 +213,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitattributes" />
-    <Content Include=".gitignore" />
     <Content Include="app\404.html" />
     <Content Include="app\favicon.ico" />
     <Content Include="app\images\yeoman.png" />

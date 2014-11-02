@@ -5,6 +5,10 @@ node_modules
 bower_components
 .idea
 .tmp
+obj
+bin
+
+
 
 # Folder config file
 Desktop.ini
