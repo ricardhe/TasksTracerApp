@@ -31,16 +31,11 @@
         <h3 class="text-muted">taskTracker</h3>
       </div>
 
-      <div ng-controller="UserCtrl">
-            <span>{{message}}</span>
-            <form ng-submit="submit()">
-                <input ng-model="user.username" type="text" name="user" placeholder="Username" />
-                <input ng-model="user.password" type="password" name="pass" placeholder="Password" />
-                <input type="submit" value="Login" />
-            </form>
+        <loginDialog></loginDialog>
 
-        </div>
+        <logindialog></logindialog>
 
+        <logindialog></logindialog>
 
     <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
@@ -173,6 +168,8 @@
       <script src="scripts/Authentication/AuthService.js"></script>
 
       <script src="scripts/WorkGroups/WorkGroupService.js"></script>
+
+      <script src="scripts/Authentication/LoginDialogDirective.js"></script>
 
     <!-- endbuild -->
 </body>
