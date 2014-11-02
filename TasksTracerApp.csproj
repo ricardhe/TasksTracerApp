@@ -67,7 +67,7 @@
     <Content Include="app\scripts\Models\UsersModel.js" />
     <Content Include="app\scripts\Models\WorkGroupModel.js" />
     <Content Include="app\scripts\service\AuthService.js" />
-    <Content Include="app\scripts\service\LocalStorageService.js" />
+    <Content Include="app\scripts\LocalStorage\LocalStorageService.js" />
     <Content Include="app\scripts\service\WorkGroupService.js" />
     <Content Include="bower.json" />
     <Content Include="bower_components\angular-animate\.bower.json" />
