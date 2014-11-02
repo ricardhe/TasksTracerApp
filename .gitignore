@@ -8,7 +8,10 @@ bower_components
 obj
 bin
 
-
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
 
 # Folder config file
 Desktop.ini
