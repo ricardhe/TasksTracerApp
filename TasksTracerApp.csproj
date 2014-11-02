@@ -62,11 +62,11 @@
     <Content Include=".travis.yml" />
     <Content Include="app\.buildignore" />
     <Content Include="app\.htaccess" />
-    <Content Include="app\scripts\controllers\UserController.js" />
+    <Content Include="app\scripts\Authentication\UserController.js" />
     <Content Include="app\scripts\controllers\WorkGroupController.js" />
-    <Content Include="app\scripts\Models\UsersModel.js" />
+    <Content Include="app\scripts\Authentication\UsersModel.js" />
     <Content Include="app\scripts\Models\WorkGroupModel.js" />
-    <Content Include="app\scripts\service\AuthService.js" />
+    <Content Include="app\scripts\Authentication\AuthService.js" />
     <Content Include="app\scripts\LocalStorage\LocalStorageService.js" />
     <Content Include="app\scripts\service\WorkGroupService.js" />
     <Content Include="bower.json" />
