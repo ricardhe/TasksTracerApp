@@ -62,6 +62,13 @@
     <Content Include=".travis.yml" />
     <Content Include="app\.buildignore" />
     <Content Include="app\.htaccess" />
+    <Content Include="app\scripts\controllers\UserController.js" />
+    <Content Include="app\scripts\controllers\WorkGroupController.js" />
+    <Content Include="app\scripts\Models\UsersModel.js" />
+    <Content Include="app\scripts\Models\WorkGroupModel.js" />
+    <Content Include="app\scripts\service\AuthService.js" />
+    <Content Include="app\scripts\service\LocalStorageService.js" />
+    <Content Include="app\scripts\service\WorkGroupService.js" />
     <Content Include="bower.json" />
     <Content Include="bower_components\angular-animate\.bower.json" />
     <Content Include="bower_components\angular-animate\angular-animate.min.js.map" />
