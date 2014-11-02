@@ -63,12 +63,12 @@
     <Content Include="app\.buildignore" />
     <Content Include="app\.htaccess" />
     <Content Include="app\scripts\Authentication\UserController.js" />
-    <Content Include="app\scripts\controllers\WorkGroupController.js" />
+    <Content Include="app\scripts\WorkGroups\WorkGroupController.js" />
     <Content Include="app\scripts\Authentication\UsersModel.js" />
-    <Content Include="app\scripts\Models\WorkGroupModel.js" />
+    <Content Include="app\scripts\WorkGroups\WorkGroupModel.js" />
     <Content Include="app\scripts\Authentication\AuthService.js" />
     <Content Include="app\scripts\LocalStorage\LocalStorageService.js" />
-    <Content Include="app\scripts\service\WorkGroupService.js" />
+    <Content Include="app\scripts\WorkGroups\WorkGroupService.js" />
     <Content Include="bower.json" />
     <Content Include="bower_components\angular-animate\.bower.json" />
     <Content Include="bower_components\angular-animate\angular-animate.min.js.map" />
@@ -386,6 +386,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\scripts\Models\" />
+    <Folder Include="app\scripts\service\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
