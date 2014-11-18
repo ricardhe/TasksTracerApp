@@ -7,6 +7,10 @@ bower_components
 .tmp
 obj
 bin
+.bin
+obj\Debug
+*.gitignore*
+
 
 # Created by https://www.gitignore.io
 

@@ -7,7 +7,7 @@ app.directive('logindialog', function (AUTH_EVENTS) {
         scope: {
             message:'@'
         },
-        link: function (scope) {
+        link: function (scope) {  sadasdada
             /*
             var showDialog = function () {
                 scope.visible = true;
