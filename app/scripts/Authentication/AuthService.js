@@ -43,7 +43,7 @@ app.service('AuthService', ['$http','$q', '$log', 'apiUrl', 'Session', function 
 
     var apiurl = apiUrl + "api/Account";
 
-    this.Login = function(loginData) {
+    this.logIn = function(loginData) {
 
         var self = this;
         Session.destroy();
@@ -68,6 +68,32 @@ app.service('AuthService', ['$http','$q', '$log', 'apiUrl', 'Session', function 
               });
 
         return deferred.promise;
+    }
+
+    this.logOut = function () {
+        var self = this;
+        
+        var deferred = $q.defer();
+
+        $http(
+                    {
+                        url: apiUrl + 'Account/Logout',
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    }
+            ).success(function (res) {
+
+                Session.destroy();
+                $log.info('LogedOut succeful');
+                deferred.resolve(res);
+
+            }).error(function (error) {
+                $log.warn('Error while tryn to get Loged Out : ' + error.message);
+                deferred.reject(error);
+            });
+
+        return deferred.promise;
+
     }
 
     this.isAuthenticated = function () {

@@ -5,18 +5,13 @@ app.directive('logindialog', function (AUTH_EVENTS) {
         restrict: 'EA',
         templateUrl: 'scripts/Authentication/login-form.html',
         scope: {
-            message:'@'
+            visible: '='
         },
         link: function (scope) {  
-            /*
-            var showDialog = function () {
-                scope.visible = true;
-            };
 
-            scope.visible = true;
-            scope.$on(AUTH_EVENTS.notAuthenticated, showDialog);
-            scope.$on(AUTH_EVENTS.sessionTimeout, showDialog);
-            */
+            scope.$on(AUTH_EVENTS.notAuthenticated, scope.showDialog);
+            scope.$on(AUTH_EVENTS.sessionTimeout, scope.showDialog);
+            
         },
         controller: ['$scope', 'AuthService', function ($scope,AuthService) {
             'use strict';
@@ -25,11 +20,42 @@ app.directive('logindialog', function (AUTH_EVENTS) {
             var confirmpassword = "Valencia2!";
 
             $scope.user = { username: username, password: password };
-            //$scope.message = '';
-            message = '';
 
+            $scope.message = '';
+            $scope.logged = false;
+            $scope.actionNoLogged = "";
+            $scope.actionLogged = "";
 
-            $scope.submit = function () {
+            $scope.showDialog = function () {
+                $scope.visible = true;
+            };
+
+            $scope.goToLogin = function () {
+                $scope.actionNoLogged = "login";
+            }
+
+            $scope.goToRegister= function () {
+                $scope.actionNoLogged = "register";
+            }
+
+            $scope.logOut = function () {
+                AuthService.logOut().then(
+                    function (data) {
+                        $scope.logged = false;
+                        $scope.actionLogged = "";
+                        $scope.actionNoLogged = "";
+                    },
+                    function (error) {
+                        $scope.message = 'An error ocurred while trying to get loged Out';
+                    }
+                );
+            }
+
+            $scope.goToEditProfile = function () {
+                $scope.actionLogged = "editprofile";
+            }
+
+            $scope.logIn = function () {
 
                 var loginData = {
                     grant_type: 'password',
@@ -37,12 +63,15 @@ app.directive('logindialog', function (AUTH_EVENTS) {
                     password: $scope.user.password
                 };
 
-                AuthService.Login(loginData).then(
+                AuthService.logIn(loginData).then(
                     function (data) {
-                        message = 'Welcome ' + username;
+                        $scope.message = 'Welcome ' + username;
+                        $scope.logged = true;
+                        $scope.actionLogged = "";
+                        $scope.actionNoLogged = "";
                     },
                     function (error) {
-                        message = 'An error ocurred while trying to get loged';
+                        $scope.message = 'An error ocurred while trying to get loged';
                     }
                     );
 
