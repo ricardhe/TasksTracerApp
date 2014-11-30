@@ -77,7 +77,7 @@ app.service('AuthService', ['$http','$q', '$log', 'apiUrl', 'Session', function 
 
         $http(
                     {
-                        url: apiUrl + 'Account/Logout',
+                        url: apiUrl + 'api/Account/Logout',
                         method: 'POST',
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                     }

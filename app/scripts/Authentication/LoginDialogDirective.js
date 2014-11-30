@@ -22,12 +22,13 @@ app.directive('logindialog', function (AUTH_EVENTS) {
             $scope.user = { username: username, password: password };
 
             $scope.message = '';
+            $scope.message_fora = '';
             $scope.logged = false;
             $scope.actionNoLogged = "";
             $scope.actionLogged = "";
 
             $scope.showDialog = function () {
-                $scope.visible = true;
+                $scope.logged = false;
             };
 
             $scope.goToLogin = function () {
